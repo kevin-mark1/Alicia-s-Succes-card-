@@ -206,7 +206,7 @@
       object-fit: cover;
     }
 
-    /* FIX 1: Next Arrow Button Positioned at Bottom Right */
+    /* Navigation Arrows */
     .next-arrow-btn {
       position: absolute;
       right: 25px;
@@ -293,41 +293,42 @@
       text-align: right;
     }
 
-    /* Rewards Grid */
-    .rewards-grid {
+    /* 2-Option Hub Grid (Increased Size) */
+    .rewards-grid-2 {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
       width: 100%;
-      margin-top: 25px;
+      max-width: 520px;
+      margin-top: 30px;
     }
 
-    .reward-card {
+    .reward-card-large {
       background: #faf4f0;
       border: 1px solid #ebdada;
-      border-radius: 16px;
-      padding: 20px 10px;
+      border-radius: 20px;
+      padding: 35px 20px;
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
     }
 
-    .reward-card:hover {
-      transform: translateY(-5px);
+    .reward-card-large:hover {
+      transform: translateY(-6px);
       background: #ffffff;
-      box-shadow: 0 8px 20px rgba(232, 165, 184, 0.25);
+      box-shadow: 0 12px 25px rgba(232, 165, 184, 0.3);
       border-color: var(--accent-pink);
     }
 
-    .reward-icon {
-      font-size: 2.2rem;
+    .reward-icon-large {
+      font-size: 3.5rem;
     }
 
-    .reward-title {
-      font-size: 0.9rem;
+    .reward-title-large {
+      font-size: 1.2rem;
       font-weight: 600;
       color: var(--text-dark);
     }
@@ -362,7 +363,7 @@
       100% { transform: translateY(620px) rotate(360deg); opacity: 0; }
     }
 
-    /* FIX 2: REALISTIC CAKE & KNIFE DESIGN */
+    /* Cake Stage */
     .cake-stage {
       position: relative;
       width: 100%;
@@ -442,7 +443,6 @@
       font-size: 1.8rem;
     }
 
-    /* REALISTIC KNIFE */
     .chef-knife {
       position: absolute;
       right: 15px;
@@ -498,42 +498,6 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
 
-    /* Video player container */
-    .video-container {
-      width: 100%;
-      max-width: 420px;
-      height: 260px;
-      background: #000;
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-      margin-top: 15px;
-      box-shadow: var(--shadow);
-    }
-
-    .video-container video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .back-to-options {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      background: rgba(255, 255, 255, 0.9);
-      border: none;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--accent-red);
-      cursor: pointer;
-      display: none;
-      z-index: 20;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
     /* Spotify Link */
     .spotify-box {
       background: #faf4f0;
@@ -572,6 +536,9 @@
       }
       .page {
         padding: 25px 18px 60px 18px;
+      }
+      .rewards-grid-2 {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -621,28 +588,24 @@
       <button class="next-arrow-btn" onclick="goToPage(4)">→</button>
     </div>
 
-    <!-- PAGE 4: OPTIONS / REWARDS HUB -->
+    <!-- PAGE 4: 2-OPTION HUB (MEMORIES & SWEET TREAT) -->
     <div class="page" id="page4">
-      <h2 style="font-family: var(--font-heading); color: var(--accent-red); margin-bottom: 5px;">Post-Exam Rewards 🎁</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">Choose an option below to explore!</p>
+      <h2 style="font-family: var(--font-heading); color: var(--accent-red); margin-bottom: 5px;">Post-Exam Celebrations 🎁</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">Tap an option below to explore your treats!</p>
       
-      <div class="rewards-grid">
-        <div class="reward-card" onclick="goToPage(5)">
-          <div class="reward-icon">📷</div>
-          <div class="reward-title">Memories</div>
+      <div class="rewards-grid-2">
+        <div class="reward-card-large" onclick="goToPage(5)">
+          <div class="reward-icon-large">📷</div>
+          <div class="reward-title-large">Memories</div>
         </div>
-        <div class="reward-card" onclick="goToPage(6)">
-          <div class="reward-icon">🍰</div>
-          <div class="reward-title">Sweet Treat</div>
-        </div>
-        <div class="reward-card" onclick="goToPage(7)">
-          <div class="reward-icon">🎬</div>
-          <div class="reward-title">Surprise Box</div>
+        <div class="reward-card-large" onclick="goToPage(6)">
+          <div class="reward-icon-large">🍰</div>
+          <div class="reward-title-large">Sweet Treat</div>
         </div>
       </div>
     </div>
 
-    <!-- PAGE 5: MEMORIES WITH 12 FALLING PICTURES -->
+    <!-- PAGE 5: MEMORIES WITH 25 FALLING PICTURES -->
     <div class="page" id="page5">
       <button class="prev-arrow-btn" onclick="goToPage(4)">←</button>
       <h2 style="font-family: var(--font-heading); color: var(--accent-red); z-index: 5;">Our Beautiful Memories 📸</h2>
@@ -650,7 +613,7 @@
       <div class="falling-photo-container" id="fallingPhotosContainer"></div>
     </div>
 
-    <!-- PAGE 6: REDESIGNED REALISTIC CAKE & KNIFE -->
+    <!-- PAGE 6: SWEET TREAT CAKE CUTTING GAME -->
     <div class="page" id="page6">
       <button class="prev-arrow-btn" onclick="goToPage(4)">←</button>
       <h2 style="font-family: var(--font-heading); color: var(--accent-red); margin-bottom: 2px;">Cut Your Victory Cake! 🍰</h2>
@@ -677,27 +640,18 @@
       </div>
 
       <button id="shareSliceBtn" style="display:none; margin-top: 15px; background:var(--accent-red); color:white; border:none; padding:10px 22px; border-radius:20px; cursor:pointer; font-weight:600; box-shadow:0 4px 12px rgba(139,38,62,0.2);" onclick="shareCakeSlice()">Share Cake Slice 🍰📱</button>
+      <button class="next-arrow-btn" id="cakeNextBtn" style="display:none;" onclick="goToPage(7)">→</button>
     </div>
 
-    <!-- PAGE 7: SURPRISE BOX VIDEO -->
+    <!-- PAGE 7: FINAL PAGE WITH PIC 26 & MUSIC / SPOTIFY LINK -->
     <div class="page" id="page7">
-      <button class="back-to-options" id="backToOptionsBtn" onclick="goToPage(4)">← Back to Options</button>
-      <h2 style="font-family: var(--font-heading); color: var(--accent-red); margin-top: 10px;">A Special Video For You 🎥</h2>
-      
-      <div class="video-container">
-        <video id="successVideo" controls onended="videoEnded()">
-          <source src="assets/success-video.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-      <button class="next-arrow-btn" id="videoNextArrow" style="display:none;" onclick="goToPage(8)">→</button>
-    </div>
+      <button class="prev-arrow-btn" onclick="goToPage(6)">←</button>
+      <h2 style="font-family: var(--font-heading); color: var(--accent-red); margin-bottom: 5px;">Very Special Vibes 🎵</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Celebrating your success every step of the way!</p>
 
-    <!-- PAGE 8: FINAL MUSIC & SPOTIFY LINK -->
-    <div class="page" id="page8">
-      <button class="prev-arrow-btn" onclick="goToPage(4)">←</button>
-      <h2 style="font-family: var(--font-heading); color: var(--accent-red);">Very Special Vibes 🎵</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">Enjoying your special song while you unwind.</p>
+      <div class="photo-frame">
+        <img src="assets/pic26.jpg" alt="Special Memory">
+      </div>
 
       <div class="spotify-box">
         <p style="font-size: 0.9rem; color: var(--text-dark); font-weight: 500;">Want to listen to your own Spotify playlists?</p>
@@ -707,7 +661,7 @@
 
   </div>
 
-  <!-- FIX 3: AUDIO PLAYER WITH PROPER PATH AND INSTANT PLAY -->
+  <!-- AUDIO PLAYER FOR 'VERY SPECIAL' SONG -->
   <audio id="bgMusic" loop preload="auto">
     <source src="assets/Very Special.mp3" type="audio/mp3">
   </audio>
@@ -725,7 +679,6 @@
       }
     }
 
-    // FIX 3: OPEN ENVELOPE AND IMMEDIATELY START PLAYING AUDIO
     function openEnvelope() {
       document.getElementById('envelopeFlap').style.transform = 'rotateX(180deg)';
       
@@ -742,12 +695,12 @@
       }, 600);
     }
 
-    // Falling 12 photos generator
+    // Falling 25 photos generator for Memories page
     function initFallingPhotos() {
       const container = document.getElementById('fallingPhotosContainer');
       container.innerHTML = '';
       
-      for (let i = 1; i <= 12; i++) {
+      for (let i = 1; i <= 25; i++) {
         const img = document.createElement('img');
         img.className = 'falling-img';
         img.src = `assets/pic${i}.jpg`;
@@ -758,7 +711,7 @@
       }
     }
 
-    // FIX 2: Cake cutting animation logic
+    // Cake cutting animation logic
     let cakeCut = false;
     function cutCake() {
       const knife = document.getElementById('chefKnife');
@@ -784,6 +737,7 @@
         slice.style.top = '220px';
         slice.style.left = (plate.offsetLeft + 10) + 'px';
         document.getElementById('shareSliceBtn').style.display = 'inline-block';
+        document.getElementById('cakeNextBtn').style.display = 'flex';
       }, 400);
     }
 
@@ -797,11 +751,6 @@
       } else {
         alert("Share link copied! Send it via WhatsApp, Snapchat, or Instagram!");
       }
-    }
-
-    function videoEnded() {
-      document.getElementById('backToOptionsBtn').style.display = 'block';
-      document.getElementById('videoNextArrow').style.display = 'flex';
     }
 
     // Falling flower particles
