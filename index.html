@@ -43,7 +43,6 @@
       padding: 20px 10px;
     }
 
-    /* Container Box */
     .card-container {
       width: 100%;
       max-width: 680px;
@@ -58,7 +57,6 @@
       flex-direction: column;
     }
 
-    /* Page Navigation System */
     .page {
       display: none;
       opacity: 0;
@@ -70,6 +68,7 @@
       min-height: 580px;
       text-align: center;
       width: 100%;
+      position: relative;
     }
 
     .page.active {
@@ -77,12 +76,13 @@
       opacity: 1;
     }
 
-    /* Floating Heart Particles */
+    /* Falling Flowers Particle Background */
     .particle {
       position: absolute;
       pointer-events: none;
       animation: floatUp 4s linear infinite;
       opacity: 0.6;
+      z-index: 1;
     }
 
     @keyframes floatUp {
@@ -90,12 +90,13 @@
       100% { transform: translateY(-600px) rotate(360deg); opacity: 0; }
     }
 
-    /* Page 1: Envelope Opening */
+    /* Page 1: Envelope Cover */
     .envelope-wrapper {
       cursor: pointer;
       margin-top: 20px;
       position: relative;
       transition: transform 0.3s ease;
+      z-index: 2;
     }
 
     .envelope-wrapper:hover {
@@ -139,7 +140,7 @@
       color: white;
       font-size: 20px;
       box-shadow: 0 4px 10px rgba(139,38,62,0.3);
-      z-index: 2;
+      z-index: 3;
     }
 
     .envelope-title {
@@ -147,6 +148,7 @@
       font-size: 2.2rem;
       color: var(--accent-red);
       margin-bottom: 25px;
+      z-index: 2;
     }
 
     .click-hint {
@@ -154,12 +156,22 @@
       color: var(--text-muted);
       margin-top: 25px;
       font-style: italic;
+      z-index: 2;
     }
 
-    /* Page 2: Banner Photo */
+    /* Slide Up Animation for Page 2 Info */
+    .slide-up-content {
+      animation: slideUpContent 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideUpContent {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
     .banner-title {
       font-family: var(--font-heading);
-      font-size: 2.6rem;
+      font-size: 2.4rem;
       color: var(--accent-red);
       font-weight: 600;
       line-height: 1.2;
@@ -168,21 +180,20 @@
 
     .banner-subtitle {
       font-family: var(--font-script);
-      font-size: 2.8rem;
+      font-size: 2.6rem;
       color: var(--accent-pink);
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     .photo-frame {
       width: 100%;
-      max-width: 420px;
-      height: 280px;
+      max-width: 380px;
+      height: 250px;
       background: #eee;
       border-radius: 16px;
       overflow: hidden;
       box-shadow: var(--shadow);
       border: 6px solid #fff;
-      position: relative;
     }
 
     .photo-frame img {
@@ -191,42 +202,69 @@
       object-fit: cover;
     }
 
-    /* Page 3: Success Letter */
+    /* Right Arrow Indicator */
+    .next-arrow-btn {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--accent-red);
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(139,38,62,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+      z-index: 10;
+    }
+
+    .next-arrow-btn:hover {
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    /* Letter Page */
     .letter-paper {
       background: var(--paper-cream);
       border: 1px solid var(--border-color);
       border-radius: 16px;
-      padding: 30px;
+      padding: 25px 30px;
       text-align: left;
       width: 100%;
+      max-height: 500px;
+      overflow-y: auto;
       box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
-      position: relative;
     }
 
     .letter-header {
       font-family: var(--font-heading);
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       color: var(--accent-red);
-      margin-bottom: 15px;
-      border-bottom: 1px linear-gradient(to right, var(--accent-pink), transparent);
-      padding-bottom: 8px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 6px;
     }
 
     .letter-body {
-      font-size: 1rem;
-      line-height: 1.7;
+      font-size: 0.95rem;
+      line-height: 1.6;
       color: var(--text-dark);
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     .letter-sig {
       font-family: var(--font-script);
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: var(--accent-red);
       text-align: right;
     }
 
-    /* Page 4: Interactive Rewards */
+    /* Rewards Grid */
     .rewards-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -265,192 +303,194 @@
       color: var(--text-dark);
     }
 
-    /* Page 5: Vinyl Player & Message */
-    .vinyl-container {
-      position: relative;
-      width: 140px;
-      height: 140px;
-      margin: 15px 0;
-    }
-
-    .vinyl {
+    /* Falling Images Memories Page */
+    .falling-photo-container {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle, #222 35%, #111 36%, #333 40%, #111 60%, #222 70%);
-      border-radius: 50%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .falling-img {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      animation: fallDown linear infinite;
+    }
+
+    @keyframes fallDown {
+      0% { transform: translateY(-80px) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.9; }
+      90% { opacity: 0.9; }
+      100% { transform: translateY(600px) rotate(360deg); opacity: 0; }
+    }
+
+    /* Cake Cutting Game Styles */
+    .cake-game-wrapper {
+      position: relative;
+      width: 100%;
+      height: 340px;
+      background: #faf4f0;
+      border-radius: 16px;
+      border: 1px dashed var(--border-color);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-      animation: spin 8s linear infinite;
-      animation-play-state: paused;
+      overflow: hidden;
+      margin-top: 10px;
     }
 
-    .vinyl.playing {
-      animation-play-state: running;
+    .chocolate-cake {
+      width: 180px;
+      height: 140px;
+      background: #5c3a21;
+      border-radius: 12px 12px 8px 8px;
+      position: relative;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      cursor: pointer;
     }
 
-    @keyframes spin {
-      100% { transform: rotate(360deg); }
-    }
-
-    .vinyl-center {
-      width: 45px;
-      height: 45px;
-      background: var(--accent-pink);
-      border-radius: 50%;
-      border: 3px solid #fff;
-    }
-
-    /* Page 6: Polaroid Gallery */
-    .polaroid-grid {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
+    .cake-layer {
+      position: absolute;
       width: 100%;
-      margin: 20px 0;
-      flex-wrap: wrap;
+      height: 30px;
+      background: #8b5a2b;
+      top: 50px;
     }
 
-    .polaroid {
-      background: #fff;
-      padding: 10px 10px 25px 10px;
-      border-radius: 4px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-      width: 140px;
-      transform: rotate(-3deg);
-      transition: transform 0.3s;
+    .cake-frosting {
+      position: absolute;
+      width: 100%;
+      height: 25px;
+      background: #3d2314;
+      border-radius: 12px 12px 0 0;
     }
 
-    .polaroid:nth-child(2) {
-      transform: rotate(3deg);
-    }
-
-    .polaroid:nth-child(3) {
-      transform: rotate(-1deg);
-    }
-
-    .polaroid:hover {
-      transform: scale(1.08) rotate(0deg);
+    .knife {
+      position: absolute;
+      top: 20px;
+      right: -50px;
+      font-size: 2rem;
+      cursor: grab;
+      transition: transform 0.2s;
       z-index: 5;
     }
 
-    .polaroid-img {
+    .side-plates {
+      position: absolute;
+      bottom: 15px;
       width: 100%;
-      height: 110px;
-      background: #e2d2ce;
-      border-radius: 2px;
-      object-fit: cover;
-    }
-
-    .polaroid-caption {
-      font-family: var(--font-handwriting);
-      font-size: 1.1rem;
-      color: var(--text-dark);
-      margin-top: 8px;
-    }
-
-    /* Page 7: Bouquet Affirmations */
-    .bouquet-icon {
-      font-size: 4rem;
-      margin-bottom: 10px;
-    }
-
-    .affirmation-list {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
-      max-width: 420px;
-      text-align: center;
-      margin: 15px 0;
+      justify-content: space-around;
+      padding: 0 20px;
     }
 
-    .affirmation-item {
-      font-family: var(--font-handwriting);
-      font-size: 1.3rem;
-      color: var(--accent-red);
-    }
-
-    /* Page 8: Monogrammed Heart Closing */
-    .locket {
-      width: 120px;
-      height: 120px;
-      background: #f7d6e0;
-      border: 2px solid var(--accent-pink);
-      clip-path: path('M 60 20 C 60 20 40 0 20 0 C 8 0 0 10 0 25 C 0 45 30 65 60 105 C 90 65 120 45 120 25 C 120 10 112 0 100 0 C 80 0 60 20 60 20 Z');
+    .plate {
+      width: 65px;
+      height: 25px;
+      background: #fff;
+      border: 2px solid #e0d0c8;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 20px 0;
-      box-shadow: 0 8px 20px rgba(232, 165, 184, 0.4);
+      font-size: 0.7rem;
+      color: var(--text-muted);
     }
 
-    .locket-initials {
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      color: var(--accent-red);
-      font-weight: 600;
-      margin-top: -20px;
-    }
-
-    /* Bottom Navigation Controls */
-    .nav-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      border-top: 1px solid var(--border-color);
-      background: #fff;
-    }
-
-    .nav-btn {
-      background: none;
-      border: 1px solid var(--border-color);
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-family: var(--font-body);
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-dark);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .nav-btn:hover {
-      background: var(--bg-color);
+    .plate:hover {
       border-color: var(--accent-pink);
     }
 
-    .nav-btn.primary {
-      background: var(--accent-red);
-      color: #fff;
-      border-color: var(--accent-red);
+    .floating-slice {
+      position: absolute;
+      width: 50px;
+      height: 40px;
+      background: #5c3a21;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      display: none;
+      z-index: 10;
+      transition: all 1s ease;
     }
 
-    .nav-btn.primary:hover {
-      background: #721e32;
+    /* Video player container */
+    .video-container {
+      width: 100%;
+      max-width: 420px;
+      height: 260px;
+      background: #000;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      margin-top: 15px;
+      box-shadow: var(--shadow);
     }
 
-    .page-dots {
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .back-to-options {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-red);
+      cursor: pointer;
+      display: none;
+      z-index: 20;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Music Player & Spotify Link */
+    .spotify-box {
+      background: #faf4f0;
+      border: 1px solid var(--border-color);
+      padding: 20px;
+      border-radius: 16px;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 420px;
       display: flex;
-      gap: 6px;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
     }
 
-    .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #e2d2ce;
-      transition: all 0.3s;
+    .spotify-btn {
+      background: #1DB954;
+      color: white;
+      text-decoration: none;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
+      transition: background 0.2s;
     }
 
-    .dot.active {
-      background: var(--accent-red);
-      width: 18px;
-      border-radius: 10px;
+    .spotify-btn:hover {
+      background: #1aa34a;
     }
 
-    /* Popup Modal */
+    /* Modal */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -487,7 +527,6 @@
       color: var(--text-muted);
     }
 
-    /* Mobile Responsive adjustments */
     @media (max-width: 480px) {
       .card-container {
         border-radius: 16px;
@@ -496,15 +535,6 @@
       .page {
         padding: 25px 18px;
       }
-      .banner-title {
-        font-size: 2rem;
-      }
-      .rewards-grid {
-        grid-template-columns: 1fr;
-      }
-      .polaroid {
-        width: 110px;
-      }
     }
   </style>
 </head>
@@ -512,137 +542,132 @@
 
   <div class="card-container" id="particlesContainer">
 
-    <!-- PAGE 1: ENVELOPE -->
+    <!-- PAGE 1: ENVELOPE COVER -->
     <div class="page active" id="page1">
       <h1 class="envelope-title">You Got Mail! ✨</h1>
-      <div class="envelope-wrapper" onclick="nextPage()">
+      <div class="envelope-wrapper" onclick="openEnvelope()">
         <div class="envelope">
-          <div class="envelope-flap"></div>
-          <div class="envelope-heart-stamp">✉️</div>
+          <div class="envelope-flap" id="envelopeFlap"></div>
+          <div class="envelope-heart-stamp">❤️</div>
         </div>
       </div>
       <p class="click-hint">Click the envelope to open your exam success card</p>
     </div>
 
-    <!-- PAGE 2: BANNER HEADER -->
+    <!-- PAGE 2: HERO INFO WITH PIC 13 -->
     <div class="page" id="page2">
-      <h1 class="banner-title">GO CRUSH YOUR EXAMS!</h1>
-      <div class="banner-subtitle">My Dearest Smart Girl 🎓✨</div>
-      <div class="photo-frame">
-        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Study & Success Inspiration">
-      </div>
-      <p style="margin-top: 15px; color: var(--text-muted); font-size: 0.95rem;">
-        You've put in the hours, now it's time to shine!
-      </p>
-    </div>
-
-    <!-- PAGE 3: MOTIVATION LETTER -->
-    <div class="page" id="page3">
-      <div class="letter-paper">
-        <div class="letter-header">To My Brilliance,</div>
-        <div class="letter-body">
-          I've watched how hard you've worked, how dedicated you've been, and how much heart you put into everything you do.<br><br>
-          As you step into these upcoming exams, remember that you are capable, fully prepared, and so much smarter than you give yourself credit for. Take a deep breath — you've completely got this!
+      <button class="next-arrow-btn" onclick="goToPage(3)">→</button>
+      <div class="slide-up-content">
+        <h1 class="banner-title">GO CRUSH YOUR EXAMS!</h1>
+        <div class="banner-subtitle">My Dearest Smart Girl 🎓✨</div>
+        <div class="photo-frame">
+          <img src="assets/pic13.jpg" alt="Success Inspiration">
         </div>
-        <div class="letter-sig">Rooting for you always, ❤️</div>
-      </div>
-    </div>
-
-    <!-- PAGE 4: GIFTS FOR AFTER EXAMS -->
-    <div class="page" id="page4">
-      <h2 style="font-family: var(--font-heading); color: var(--accent-red); margin-bottom: 5px;">Post-Exam Rewards 🎁</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">Click each gift to reveal your post-exam treat!</p>
-      
-      <div class="rewards-grid">
-        <div class="reward-card" onclick="openModal('📷 Celebratory Date Night', 'Voucher valid for a full stress-free date night & cute photo session the moment your final exam ends!')">
-          <div class="reward-icon">📷</div>
-          <div class="reward-title">Memories</div>
-        </div>
-        <div class="reward-card" onclick="openModal('🍰 Victory Cake & Treats', 'Voucher for your favorite dessert and a big celebratory meal right after exams!')">
-          <div class="reward-icon">🍰</div>
-          <div class="reward-title">Sweet Treat</div>
-        </div>
-        <div class="reward-card" onclick="openModal('💌 Relax & Unwind', 'A full weekend of cozy movies, zero study talk, and endless pampering!')">
-          <div class="reward-icon">🎁</div>
-          <div class="reward-title">Surprise</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PAGE 5: VINYL STUDY VIBES -->
-    <div class="page" id="page5">
-      <h2 style="font-family: var(--font-heading); color: var(--accent-red);">Study Focus & Calm 🎧</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Tap the record to toggle chill study ambient beats</p>
-
-      <div class="vinyl-container" onclick="toggleAudio()">
-        <div class="vinyl" id="vinylRecord">
-          <div class="vinyl-center"></div>
-        </div>
-      </div>
-
-      <div style="background: #faf4f0; padding: 15px 20px; border-radius: 12px; border: 1px solid var(--border-color); max-width: 400px; margin-top: 10px;">
-        <p style="font-style: italic; font-size: 0.9rem; color: var(--text-dark);">
-          "Trust the preparation. Stay calm, stay focused, and let your brilliance shine through!"
+        <p style="margin-top: 15px; color: var(--text-muted); font-size: 0.95rem;">
+          You've put in the hours, now it's time to shine!
         </p>
       </div>
     </div>
 
-    <!-- PAGE 6: POLAROID MEMORIES -->
+    <!-- PAGE 3: SUCCESS LETTER -->
+    <div class="page" id="page3">
+      <button class="next-arrow-btn" onclick="goToPage(4)">→</button>
+      <div class="letter-paper">
+        <div class="letter-header">To My Dearest Alicia,</div>
+        <div class="letter-body">
+          As you step into your examination room, I want you to take a deep, grounding breath and remember just how capable you truly are. I have witnessed firsthand the late nights, the incredible dedication, the focus, and the immense heart you have poured into your preparation. You didn't just study hard; you showed up for your future every single day with resilience and grace.<br><br>
+          Whenever doubt tries to creep in, remember all the obstacles you’ve already overcome and how brilliantly your mind works. You are infinitely smarter, stronger, and more prepared than you realize. Trust in your knowledge, trust in your hard work, and let your brilliance shine effortlessly.<br><br>
+          No matter what happens on paper, you are already my greatest success and my absolute pride. Go in there with confidence—you've got this completely handled!
+        </div>
+        <div class="letter-sig">Forever your biggest cheerleader, ❤️</div>
+      </div>
+    </div>
+
+    <!-- PAGE 4: OPTIONS / REWARDS HUB -->
+    <div class="page" id="page4">
+      <h2 style="font-family: var(--font-heading); color: var(--accent-red); margin-bottom: 5px;">Post-Exam Rewards 🎁</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">Choose an option below to explore!</p>
+      
+      <div class="rewards-grid">
+        <div class="reward-card" onclick="goToPage(5)">
+          <div class="reward-icon">📷</div>
+          <div class="reward-title">Memories</div>
+        </div>
+        <div class="reward-card" onclick="goToPage(6)">
+          <div class="reward-icon">🍰</div>
+          <div class="reward-title">Sweet Treat</div>
+        </div>
+        <div class="reward-card" onclick="goToPage(7)">
+          <div class="reward-icon">🎬</div>
+          <div class="reward-title">Surprise Box</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 5: MEMORIES WITH 12 FALLING PICTURES -->
+    <div class="page" id="page5">
+      <button class="next-arrow-btn" onclick="goToPage(4)" style="left: 20px; right: auto;">←</button>
+      <h2 style="font-family: var(--font-heading); color: var(--accent-red); z-index: 5;">Our Beautiful Memories 📸</h2>
+      <p style="color: var(--text-muted); font-size: 0.85rem; z-index: 5;">Endless reminders of our favorite moments together!</p>
+      <div class="falling-photo-container" id="fallingPhotosContainer"></div>
+    </div>
+
+    <!-- PAGE 6: SWEET TREAT CAKE CUTTING GAME -->
     <div class="page" id="page6">
-      <h2 style="font-family: var(--font-heading); color: var(--accent-red);">Favorite Moments 📸</h2>
-      <p style="color: var(--text-muted); font-size: 0.85rem;">Reminders of the smiles waiting after exams!</p>
-      
-      <div class="polaroid-grid">
-        <div class="polaroid">
-          <img class="polaroid-img" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Memory 1">
-          <div class="polaroid-caption">Future Graduate</div>
+      <button class="next-arrow-btn" onclick="goToPage(4)" style="left: 20px; right: auto;">←</button>
+      <h2 style="font-family: var(--font-heading); color: var(--accent-red); margin-bottom: 2px;">Cut Your Victory Cake! 🍰</h2>
+      <p style="color: var(--text-muted); font-size: 0.85rem;">Click the knife to cut a slice, then tap a plate below!</p>
+
+      <div class="cake-game-wrapper">
+        <div class="chocolate-cake" onclick="cutCake()">
+          <div class="cake-frosting"></div>
+          <div class="cake-layer"></div>
         </div>
-        <div class="polaroid">
-          <img class="polaroid-img" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=400&q=80" alt="Memory 2">
-          <div class="polaroid-caption">Soulmates</div>
-        </div>
-        <div class="polaroid">
-          <img class="polaroid-img" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80" alt="Memory 3">
-          <div class="polaroid-caption">Always Proud</div>
+        <div class="knife" id="cakeKnife">🔪</div>
+        <div class="floating-slice" id="floatingSlice"></div>
+        <div class="side-plates">
+          <div class="plate" onclick="selectPlate(this)">Plate 1</div>
+          <div class="plate" onclick="selectPlate(this)">Plate 2</div>
+          <div class="plate" onclick="selectPlate(this)">Plate 3</div>
         </div>
       </div>
+      <button id="shareSliceBtn" style="display:none; margin-top: 15px; background:var(--accent-red); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-weight:600;" onclick="shareCakeSlice()">Share Cake Slice 🍰📱</button>
     </div>
 
-    <!-- PAGE 7: BOUQUET & AFFIRMATIONS -->
+    <!-- PAGE 7: SURPRISE BOX VIDEO -->
     <div class="page" id="page7">
-      <div class="bouquet-icon">💐</div>
-      <h2 style="font-family: var(--font-heading); color: var(--accent-red);">Flowers For Good Luck!</h2>
+      <button class="back-to-options" id="backToOptionsBtn" onclick="goToPage(4)">← Back to Options</button>
+      <h2 style="font-family: var(--font-heading); color: var(--accent-red); margin-top: 10px;">A Special Video For You 🎥</h2>
       
-      <div class="affirmation-list">
-        <div class="affirmation-item">✨ "You are smarter than you think."</div>
-        <div class="affirmation-item">✨ "Your hard work will pay off."</div>
-        <div class="affirmation-item">✨ "I believe in you 100%!"</div>
+      <div class="video-container">
+        <video id="successVideo" controls onended="videoEnded()">
+          <source src="assets/success-video.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
+      <button class="next-arrow-btn" id="videoNextArrow" style="display:none;" onclick="goToPage(8)">→</button>
     </div>
 
-    <!-- PAGE 8: CLOSING MONOGRAM HEART -->
+    <!-- PAGE 8: FINAL MUSIC & SPOTIFY LINK -->
     <div class="page" id="page8">
-      <div class="locket">
-        <div class="locket-initials">A + K</div>
-      </div>
-      <h2 style="font-family: var(--font-heading); color: var(--accent-red); font-size: 2rem; margin-top: 10px;">
-        Love is never wasted when it's shared.
-      </h2>
-      <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">
-        Go smash those exams! I'll be waiting right here to celebrate with you. ❤️
-      </p>
-    </div>
+      <button class="next-arrow-btn" onclick="goToPage(4)" style="left: 20px; right: auto;">←</button>
+      <h2 style="font-family: var(--font-heading); color: var(--accent-red);">Very Special Vibes 🎵</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">Enjoying your special song while you unwind.</p>
 
-    <!-- BOTTOM NAVIGATION -->
-    <div class="nav-bar">
-      <button class="nav-btn" onclick="prevPage()" id="prevBtn" style="visibility: hidden;">Back</button>
-      <div class="page-dots" id="dotsContainer"></div>
-      <button class="nav-btn primary" onclick="nextPage()" id="nextBtn">Next</button>
+      <div class="spotify-box">
+        <p style="font-size: 0.9rem; color: var(--text-dark); font-weight: 500;">Want to listen to your own Spotify playlists?</p>
+        <a href="https://open.spotify.com" target="_blank" class="spotify-btn">Link & Open Spotify 🟢</a>
+      </div>
     </div>
 
   </div>
 
-  <!-- MODAL POPUP -->
+  <!-- AUDIO PLAYER FOR 'VERY SPECIAL' SONG -->
+  <audio id="bgMusic" loop>
+    <source src="assets/very-special.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- MODAL -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -652,106 +677,98 @@
   </div>
 
   <script>
-    let currentPage = 1;
-    const totalPages = 8;
+    let currentActivePage = 1;
 
-    // Build pagination dots
-    const dotsContainer = document.getElementById('dotsContainer');
-    for (let i = 1; i <= totalPages; i++) {
-      const dot = document.createElement('div');
-      dot.className = `dot ${i === 1 ? 'active' : ''}`;
-      dot.id = `dot-${i}`;
-      dotsContainer.appendChild(dot);
-    }
-
-    function showPage(pageNumber) {
+    function goToPage(pageNumber) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById(`page${pageNumber}`).classList.add('active');
+      currentActivePage = pageNumber;
 
-      // Update dots
-      document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
-      document.getElementById(`dot-${pageNumber}`).classList.add('active');
+      if (pageNumber === 5) {
+        initFallingPhotos();
+      }
+    }
 
-      // Update buttons
-      document.getElementById('prevBtn').style.visibility = pageNumber === 1 ? 'hidden' : 'visible';
+    function openEnvelope() {
+      document.getElementById('envelopeFlap').style.transform = 'rotateX(180deg)';
       
-      const nextBtn = document.getElementById('nextBtn');
-      if (pageNumber === totalPages) {
-        nextBtn.innerText = 'Replay ✨';
-      } else {
-        nextBtn.innerText = 'Next';
-      }
+      // Play audio "Very Special"
+      const music = document.getElementById('bgMusic');
+      music.play().catch(e => console.log("Audio autoplay restricted:", e));
+
+      setTimeout(() => {
+        goToPage(2);
+      }, 600);
     }
 
-    function nextPage() {
-      if (currentPage < totalPages) {
-        currentPage++;
-      } else {
-        currentPage = 1;
-      }
-      showPage(currentPage);
-    }
-
-    function prevPage() {
-      if (currentPage > 1) {
-        currentPage--;
-        showPage(currentPage);
-      }
-    }
-
-    // Modal popup helper
-    function openModal(title, text) {
-      document.getElementById('modalTitle').innerText = title;
-      document.getElementById('modalBody').innerText = text;
-      document.getElementById('modalOverlay').style.display = 'flex';
-    }
-
-    function closeModal() {
-      document.getElementById('modalOverlay').style.display = 'none';
-    }
-
-    // Web Audio API ambient audio generator
-    let audioCtx = null;
-    let isPlaying = false;
-    let oscillator = null;
-    let gainNode = null;
-
-    function toggleAudio() {
-      const vinyl = document.getElementById('vinylRecord');
+    // Falling 12 photos generator for Memories page
+    function initFallingPhotos() {
+      const container = document.getElementById('fallingPhotosContainer');
+      container.innerHTML = '';
       
-      if (!isPlaying) {
-        if (!audioCtx) {
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        
-        oscillator = audioCtx.createOscillator();
-        gainNode = audioCtx.createGain();
-
-        // Warm relaxing soft ambient tone (440Hz / A4 note with soft gain)
-        oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(220, audioCtx.currentTime); // Soft A3 pitch
-        
-        gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
-
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-
-        oscillator.start();
-        isPlaying = true;
-        vinyl.classList.add('playing');
-      } else {
-        if (oscillator) {
-          oscillator.stop();
-        }
-        isPlaying = false;
-        vinyl.classList.remove('playing');
+      for (let i = 1; i <= 12; i++) {
+        const img = document.createElement('img');
+        img.className = 'falling-img';
+        img.src = `assets/pic${i}.jpg`;
+        img.style.left = Math.random() * 85 + 5 + '%';
+        img.style.animationDuration = (Math.random() * 4 + 4) + 's';
+        img.style.animationDelay = (Math.random() * 3) + 's';
+        container.appendChild(img);
       }
     }
 
-    // Floating heart particles background generator
+    // Cake game logic
+    let cakeCut = false;
+    function cutCake() {
+      const knife = document.getElementById('cakeKnife');
+      knife.style.transform = 'translate(-60px, 30px) rotate(-45deg)';
+      setTimeout(() => {
+        cakeCut = true;
+        alert("Cake slice cut! Now tap one of the plates below to serve it.");
+        knife.style.transform = 'translate(0, 0) rotate(0deg)';
+      }, 500);
+    }
+
+    function selectPlate(plate) {
+      if (!cakeCut) {
+        alert("Please cut the cake with the knife first!");
+        return;
+      }
+      const slice = document.getElementById('floatingSlice');
+      slice.style.display = 'block';
+      slice.style.bottom = '120px';
+      slice.style.left = '50%';
+      
+      setTimeout(() => {
+        const rect = plate.getBoundingClientRect();
+        const wrapperRect = plate.parentElement.parentElement.getBoundingClientRect();
+        slice.style.bottom = '40px';
+        slice.style.left = (plate.offsetLeft + 15) + 'px';
+        document.getElementById('shareSliceBtn').style.display = 'inline-block';
+      }, 500);
+    }
+
+    function shareCakeSlice() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'A Slice of Success Cake!',
+          text: 'Enjoying a sweet slice of success after exams! 🍰✨',
+          url: window.location.href
+        }).catch(console.error);
+      } else {
+        alert("Share link copied! Send it via WhatsApp, Snapchat, or Instagram!");
+      }
+    }
+
+    function videoEnded() {
+      document.getElementById('backToOptionsBtn').style.display = 'block';
+      document.getElementById('videoNextArrow').style.display = 'flex';
+    }
+
+    // Falling flower particles generator
     function createParticles() {
       const container = document.getElementById('particlesContainer');
-      const symbols = ['🌸', '✨', '💖', '📚'];
+      const symbols = ['🌸', '✨', '💖', '💐'];
       
       setInterval(() => {
         const particle = document.createElement('div');
