@@ -662,9 +662,9 @@
 
   </div>
 
-  <!-- AUDIO PLAYER FOR 'VERY SPECIAL' SONG -->
-  <audio id="bgMusic" loop>
-    <source src="assets/very-special.mp3" type="audio/mp3">
+  <!-- AUDIO PLAYER FOR 'VERY SPECIAL' SONG (UPDATED TO MATCH EXACT ASSETS FILENAME) -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/Very Special.mp3" type="audio/mp3">
   </audio>
 
   <!-- MODAL -->
@@ -692,7 +692,7 @@
     function openEnvelope() {
       document.getElementById('envelopeFlap').style.transform = 'rotateX(180deg)';
       
-      // Play audio "Very Special"
+      // Play audio "Very Special.mp3"
       const music = document.getElementById('bgMusic');
       music.play().catch(e => console.log("Audio autoplay restricted:", e));
 
