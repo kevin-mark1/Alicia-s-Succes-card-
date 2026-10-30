@@ -90,6 +90,21 @@
       100% { transform: translateY(-600px) rotate(360deg); opacity: 0; }
     }
 
+    /* HEART TRANSITION PARTICLES */
+    .transition-heart {
+      position: absolute;
+      pointer-events: none;
+      font-size: 1.8rem;
+      z-index: 99;
+      animation: heartFall 1.2s ease-in forwards;
+    }
+
+    @keyframes heartFall {
+      0% { transform: translateY(-40px) scale(0.5); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(650px) scale(1.2) rotate(180deg); opacity: 0; }
+    }
+
     /* Page 1: Envelope Cover */
     .envelope-wrapper {
       cursor: pointer;
@@ -293,7 +308,7 @@
       text-align: right;
     }
 
-    /* 2-Option Hub Grid (Increased Size) */
+    /* 2-Option Hub Grid */
     .rewards-grid-2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -670,6 +685,7 @@
     let currentActivePage = 1;
 
     function goToPage(pageNumber) {
+      triggerHeartTransition();
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById(`page${pageNumber}`).classList.add('active');
       currentActivePage = pageNumber;
@@ -679,20 +695,56 @@
       }
     }
 
+    // INSTANT AUDIO PLAYBACK
     function openEnvelope() {
       document.getElementById('envelopeFlap').style.transform = 'rotateX(180deg)';
       
       const music = document.getElementById('bgMusic');
-      music.currentTime = 0;
-      music.play().then(() => {
-        console.log("Audio playing successfully!");
-      }).catch(err => {
-        console.log("Audio playback error:", err);
+      music.play().catch(err => {
+        console.log("Autoplay error workaround:", err);
       });
+
+      triggerHeartTransition();
 
       setTimeout(() => {
         goToPage(2);
       }, 600);
+    }
+
+    // STOP MUSIC IMMEDIATELY WHEN LEAVING BROWSER / TAB
+    let wasPlayingBeforeHidden = false;
+    document.addEventListener("visibilitychange", () => {
+      const music = document.getElementById('bgMusic');
+      if (document.hidden) {
+        if (!music.paused) {
+          wasPlayingBeforeHidden = true;
+          music.pause();
+        }
+      } else {
+        if (wasPlayingBeforeHidden && currentActivePage > 1) {
+          music.play().catch(() => {});
+        }
+      }
+    });
+
+    // FALLING HEARTS TRANSITION EFFECT
+    function triggerHeartTransition() {
+      const container = document.getElementById('particlesContainer');
+      const hearts = ['❤️', '💖', '💕', '🌸', '✨'];
+      
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'transition-heart';
+        heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 90 + 5 + '%';
+        heart.style.top = '0px';
+        heart.style.animationDelay = (Math.random() * 0.4) + 's';
+        container.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 1300);
+      }
     }
 
     // Falling 25 photos generator for Memories page
